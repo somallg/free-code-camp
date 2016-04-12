@@ -1,2 +1,2 @@
 # Free Code Camp
-* Source code of Free Code Camp Development Projects
+* Source code for Free Code Camp Development Projects
