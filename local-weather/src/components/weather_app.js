@@ -4,15 +4,9 @@ import LocationDetail from './location_detail';
 import WeatherDetail from './weather_detail';
 import { fetchLocation, fetchWeather } from '../actions';
 
-const getCurrentTimeInSeconds = () => {
-  return new Date().getTime() / 1000;
-};
+import CacheManager from '../actions/cache';
 
-let cachedWeatherData = {
-  metric: null,
-  imperial: null,
-  timeStamp: getCurrentTimeInSeconds()
-};
+const cacheManager = CacheManager();
 
 class WeatherApp extends Component {
   constructor(props) {
@@ -27,7 +21,7 @@ class WeatherApp extends Component {
     fetchLocation()
       .then(({data}) => { this.setState({ location: data }); return { city: data.city, country: data.country } })
       .then(fetchWeather)
-      .then(({data}) => { this.setState({ weather: data }); cachedWeatherData.metric = data });
+      .then(({data}) => { this.setState({ weather: data }); cacheManager.putToCache('metric', data) });
   }
 
   toggleUnits() {
@@ -39,15 +33,18 @@ class WeatherApp extends Component {
       units = 'metric';
     }
 
-    if (! cachedWeatherData[units] || cachedWeatherData.timeStamp + 60 < getCurrentTimeInSeconds()) {
+    if (cacheManager.isCacheExpired()) {
+      cacheManager.flushCache();
+    }
+
+    if (! cacheManager.isInCache(units)) {
       fetchWeather({ city, country, units })
         .then(({data}) => {
           this.setState({ weather: data, units: units });
-          cachedWeatherData[units] = data;
-          cachedWeatherData.timeStamp = new Date().getTime() / 1000;
+          cacheManager.putToCache(units, data);
         });
     } else {
-      this.setState({ weather: cachedWeatherData[units], units: units });
+      this.setState({ weather: cacheManager.getData(units), units: units });
     }
   }
 
