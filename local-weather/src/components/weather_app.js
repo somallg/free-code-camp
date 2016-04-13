@@ -4,9 +4,7 @@ import LocationDetail from './location_detail';
 import WeatherDetail from './weather_detail';
 import { fetchLocation, fetchWeather } from '../actions';
 
-import CacheManager from '../actions/cache';
-
-const cacheManager = CacheManager();
+import cacheManager from '../actions/cache';
 
 class WeatherApp extends Component {
   constructor(props) {
