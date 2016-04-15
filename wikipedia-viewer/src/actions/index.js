@@ -2,8 +2,6 @@ import $ from 'jquery';
 
 const WIKIPEDIA_API = 'https://en.wikipedia.org/w/api.php';
 
-
-
 export const searchWiki = (term) => {
   return $.ajax({
       url: `${WIKIPEDIA_API}`,
