@@ -1,5 +1,31 @@
-html {
-  body {
-    font-size: 24px;
+.app {
+
+  margin-top: 20px;
+
+  form.search-bar {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    & > * {
+      margin: 10px;
+      flex-basis: 300px;
+    }
+
+    & > *.btn {
+      flex-basis: 100px;
+    }
+  }
+
+  div.list-group {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > a {
+      width: 600px;
+      margin: 1px;
+    }
   }
 }
