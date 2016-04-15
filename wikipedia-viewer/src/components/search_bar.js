@@ -15,7 +15,7 @@ export default class SearchBar extends Component {
     );
     this.props.search(e.target.value);
   }
-  
+
   handleSubmit(e) {
     e.preventDefault();
     this.props.search(this.state.search);
@@ -28,7 +28,6 @@ export default class SearchBar extends Component {
           <input type="text" className="form-control" placeholder="Type to search"
                  value={this.state.search} onChange={this.onTextChange.bind(this)} />
         </div>
-        <button type="submit" className="btn btn-primary">Search</button>
         <a href="https://en.wikipedia.org/wiki/Special:Random" className="btn btn-info" target="_blank">Random</a>
       </form>
     )
