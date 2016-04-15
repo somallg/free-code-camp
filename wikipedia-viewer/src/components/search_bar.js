@@ -29,7 +29,7 @@ export default class SearchBar extends Component {
                  value={this.state.search} onChange={this.onTextChange.bind(this)} />
         </div>
         <button type="submit" className="btn btn-primary">Search</button>
-        <a href="https://en.wikipedia.org/wiki/Special:Random" className="btn btn-primary" target="_blank">Random</a>
+        <a href="https://en.wikipedia.org/wiki/Special:Random" className="btn btn-info" target="_blank">Random</a>
       </form>
     )
   }
